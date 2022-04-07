@@ -1,0 +1,125 @@
+USE mydatabase
+
+CREATE TABLE Customer (
+id int PRIMARY KEY ,
+FirstName nvarchar(40) Not null  ,
+LastName nvarchar(40),
+City nvarchar(40),
+Country nvarchar(40),
+Phone nvarchar(20)
+);
+
+
+
+CREATE TABLE Orderr(
+id int PRIMARY KEY,
+OrderDate datetime NOT NULL,
+OrderNumber nvarchar(10),
+Customerid int FOREIGN KEY REFERENCES Customer(id),
+TotalAmount decimal(12,2)
+);
+CREATE TABLE Order(
+id int PRIMARY KEY,
+OrderDate datetime NOT NULL,
+OrderNumber nvarchar(10),
+Customerid int FOREIGN KEY REFERENCES Customer(id),
+TotalAmount decimal(12,2)
+);
+
+CREATE TABLE OrderItem(
+id int PRIMARY KEY,
+OrderId int FOREIGN KEY REFERENCES Orderr(id),
+ProductId int FOREIGN KEY REFERENCES Product(id),
+UnitPrice decimal(12,2),
+Quantity int 
+)
+
+CREATE TABLE Product(
+id int PRIMARY KEY,
+ProductName nvarchar(50),
+UnitPrice decimal(12,2),
+Package nvarchar(30),
+IsDiscontinued bit
+)
+
+--Inserting Records
+
+Insert into Customer (id,FirstName,LastName,City,Country,Phone)
+Values (201, 'Aman', 'Singh','Jaipur','India',7014565656 ),
+		(202, 'Devansh', 'Sharma','Jaipur','India',Null ),
+			(203, 'Harsh', 'Maheshwari','Jaipur','India',7014565658),
+			(204, 'Bhavya', 'Kashyap','Jaipur','India',7014565659 ),
+			(205, 'Ayushi', 'Khandelwal','Dausa','India',7014565655 )
+
+Select * from Customer
+
+Insert into Orderr(id,OrderDate,OrderNumber,Customerid,TotalAmount)
+VALUES (101,19/02/2020,1,201,5000),
+	(102,12/02/2020,2,205,4500),
+	(103,15/03/2020,3,204,7000),
+	(104,22/7/2021,4,202,9500),
+	(105,19/02/2022,5,203,5670)
+
+Select * from Orderr
+
+Insert into Product(id,ProductName,UnitPrice,Package,IsDiscontinued)
+VALUES(500,'P1',600,'YES',0),
+	(501,'P2',550,'NO',NULL),
+	(502,'P3',1000.00,'YES',0),
+	(503,'P4',899,'YES',1),
+	(504,'P5',188.56,'YES',1),
+	(505,'P6',699,'NO',0)
+
+Select * from Product
+
+Insert into OrderItem(id,OrderId,ProductId,UnitPrice,Quantity)
+VALUES(300,103,505,788.02,10),
+		(304,101,504,478.02,1),
+		(302,104,501,558.02,3),
+		(301,102,502,788.02,25),
+		(303,105,503,88.02,15)
+
+Select * from OrderItem
+
+--6th, 7th-----
+
+Select Country from Customer
+Where Country Like 'I%' OR Country Like 'A%'
+
+Select *  from Customer 
+Where LastName Like '__i%'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
